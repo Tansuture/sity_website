@@ -1,0 +1,7 @@
+.logo-container{
+    max-width: 130px;
+    display: flex;
+    padding: 0 10px;
+    margin-top: 10px;
+    flex-grow: 1;
+}

@@ -16,11 +16,15 @@ import emblem from '../../img/Emblem.png'
 
 import './Header.css'
 
+
+
 const Header =()=>{
+ 
+
     const pages = ["Наш город","Фото-альбом","История","Гостевая книга"];
-    const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-    const user = false
-    
+
+    const [userAuth,setUser]=React.useState(false)
+
      const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const handleOpenNavMenu = (event) => {
@@ -51,7 +55,7 @@ const Header =()=>{
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-         <img  style ={{maxWidth:"100%"}}src = {emblem}/> 
+         <img  className='emblem' alt="emblem" src = {emblem}/> 
          
           </Container>
 
@@ -86,7 +90,7 @@ const Header =()=>{
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography  textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -101,16 +105,18 @@ const Header =()=>{
           </Container>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
+              
               <Button
+              className = "hoverBtn"
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2,color: 'white', display: 'block',fontFamily:`"Oswald",sans-serif`}}
               >
                 {page}
               </Button>
             ))}
           </Box>
-            {user ?  <Button color="inherit"> Login </Button>:
+            {userAuth ?  <Button onClick={()=>setUser(false)} color="inherit"> Вход</Button>:
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -133,11 +139,9 @@ const Header =()=>{
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+                <MenuItem  onClick={handleCloseUserMenu}>
+                  <Typography  onClick={()=>setUser(true)}textAlign="center">Выйти</Typography>
+                 </MenuItem>
             </Menu>
           </Box>
 }
